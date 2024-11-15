@@ -54,9 +54,12 @@ public FetchTaskResponse fetchTask(FetchTaskRequest request) {
 		    response.setPendingTask(String.valueOf(pending));
 		    int total = tasks.size();
 			response.setTotalTask(String.valueOf(total));
-		}}
+		}
+		else{	response.setMessage("no task found");
+		response.setStatus("false");
+		return response;}}
 	}
-	if(tasks!=null) {
+	if(tasks.size()>0) {
 		response.setTasks(tasks);
 		response.setMessage("task fetched successfully");
 		response.setStatus("true");
