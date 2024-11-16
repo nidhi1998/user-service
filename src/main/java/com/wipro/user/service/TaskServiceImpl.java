@@ -41,7 +41,7 @@ public FetchTaskResponse fetchTask(FetchTaskRequest request) {
 		if(request.getTeam()==null)
 		tasks = taskrepo.findUserTask(request.getUserId());
 		else
-			tasks = taskrepo.findUserTeamTask(request.getUserId());
+			tasks = taskrepo.findUserTeamTask(request.getUserId(),request.getTeam());
 	}
 	else {
 		if(request.getTeam()==null)

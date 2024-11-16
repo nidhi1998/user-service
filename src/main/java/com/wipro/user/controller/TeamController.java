@@ -29,7 +29,7 @@ public class TeamController {
 	public CreateTeamResponse createTeam(@RequestBody Team request) {
 		return teamService.createTeam(request);
 	}
-	@PostMapping("/team/fetch")
+	@PostMapping("/team/get")
 	public FetchTeamResponse fetchTeam(@RequestBody FetchTeamRequest request) {
 		return teamService.fetchTeam(request);
 	}

@@ -45,11 +45,11 @@ public class TeamServiceImpl implements TeamService {
 			return response;
 		}
 		Team team = teamRepo.findByName(request.getName());
-		if (team != null) {
+		if (team != null) { 
 			response.setMessage("team already exist");
 			response.setStatus("false");
 			return response;
-		} else {
+		} else { teamRepo.save(request);
 			response.setMessage("team created successfully");
 			response.setStatus("true");
 			return response;

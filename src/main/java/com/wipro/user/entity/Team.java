@@ -9,6 +9,8 @@ import jakarta.persistence.Table;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 @Table(name = "team")
@@ -31,6 +33,7 @@ public class Team {
     @Column
     private String details;
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<TeamUserMapping> teamUserMappings;
     // Default constructor
     public Team() {

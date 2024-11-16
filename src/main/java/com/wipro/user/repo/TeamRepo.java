@@ -12,7 +12,7 @@ import com.wipro.user.entity.Team;
 public interface TeamRepo extends CrudRepository<Team,Long> {
 	@Query(value="select * from team where name=:name",nativeQuery=true)
 	Team findByName(@Param("name")String name);
-	@Query(value="select * from team where createdBy=:userId",nativeQuery=true)
+	@Query(value="select * from team where id in (select team_id from team_user_mapping where user_id=:userId)",nativeQuery=true)
 	List<Team> findAllByAdmin(@Param("userId")String userId);
 	@Query(value="select * from team where id=:id",nativeQuery=true)
 	Team findByIdTeam(@Param("id")Long teamId);
