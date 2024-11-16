@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.wipro.user.dto.FetchUserResponse;
 import com.wipro.user.dto.LoginRequest;
 import com.wipro.user.dto.LoginResponse;
 import com.wipro.user.dto.RegisterRequest;
@@ -28,5 +29,9 @@ public class LoginController {
 	@PostMapping("/register")
 	public RegisterResponse userRegister(@RequestBody RegisterRequest request) {
 		return loginService.registerUser(request);
+	}
+	@PostMapping("/user/fetch")
+	public FetchUserResponse fetchUser() {
+		return loginService.fetchUser();
 	}
 }

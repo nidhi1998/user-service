@@ -1,9 +1,15 @@
 package com.wipro.user.entity;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+
+import java.util.Set;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 @Table(name = "team")
 @Entity
@@ -24,12 +30,23 @@ public class Team {
 
     @Column
     private String details;
-
+    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<TeamUserMapping> teamUserMappings;
     // Default constructor
     public Team() {
     }
+    
+    public Set<TeamUserMapping> getTeamUserMappings() {
+		return teamUserMappings;
+	}
 
-    // Parameterized constructor
+	public void setTeamUserMappings(Set<TeamUserMapping> teamUserMappings) {
+		this.teamUserMappings = teamUserMappings;
+	}
+
+	
+
+	// Parameterized constructor
     public Team(String name, String size, String createdBy, String details) {
         this.name = name;
         this.size = size;

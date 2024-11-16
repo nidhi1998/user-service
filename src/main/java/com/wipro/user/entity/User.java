@@ -1,10 +1,15 @@
 package com.wipro.user.entity;
 
+import java.util.Set;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Table;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 
 @Entity
@@ -21,10 +26,19 @@ public class User {
 
     private String role;
     private String password;
-    
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<TeamUserMapping> teamUserMappings;
 
     public String getPassword() {
 		return password;
+	}
+
+	public Set<TeamUserMapping> getTeamUserMappings() {
+		return teamUserMappings;
+	}
+
+	public void setTeamUserMappings(Set<TeamUserMapping> teamUserMappings) {
+		this.teamUserMappings = teamUserMappings;
 	}
 
 	public void setPassword(String password) {

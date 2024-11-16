@@ -38,7 +38,10 @@ public FetchTaskResponse fetchTask(FetchTaskRequest request) {
 	FetchTaskResponse response = new FetchTaskResponse();
 	List<Task> tasks =null;
 	if(request.getUserType().equals("user")) {
+		if(request.getTeam()==null)
 		tasks = taskrepo.findUserTask(request.getUserId());
+		else
+			tasks = taskrepo.findUserTeamTask(request.getUserId());
 	}
 	else {
 		if(request.getTeam()==null)
@@ -72,5 +75,44 @@ public FetchTaskResponse fetchTask(FetchTaskRequest request) {
 	}
 	
 }
+	@Override
+	public CreateTaskResponse deleteTask(Long id) {
+		CreateTaskResponse response = new CreateTaskResponse();
+		boolean task = taskrepo.existsById(id);
+		if(!task) {
+			response.setStatus("false");
+			response.setMessage("task not found");
+			// TODO Auto-generated method stub
+			return response;
+		}
+		taskrepo.deleteById(id);
+		response.setStatus("true");
+		response.setMessage("deleted successfully");
+		// TODO Auto-generated method stub
+		return response;
+	}
+	@Override
+	public CreateTaskResponse updateTask(Task request) {
+		CreateTaskResponse response = new CreateTaskResponse();
+		boolean task = taskrepo.existsById(request.getId());
+		if(!task) {
+			response.setStatus("false");
+			response.setMessage("task not found");
+			// TODO Auto-generated method stub
+			return response;
+		}
+		Task res = taskrepo.save(request);
+		if(res==null) {
+			response.setStatus("false");
+			response.setMessage("task update failed ");
+			// TODO Auto-generated method stub
+			return response;
+		}
+		response.setStatus("true");
+		response.setMessage("task update success ");
+		// TODO Auto-generated method stub
+		return response;
+		
+	}
   
 }

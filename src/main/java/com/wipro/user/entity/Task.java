@@ -2,6 +2,7 @@ package com.wipro.user.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Table(name = "task")
@@ -33,8 +34,9 @@ public class Task {
     private String team;
 
     private String status;
+  
 
-    // Constructors
+	// Constructors
     public Task() {}
 
     public Task(String name, String details, String assign, String type, String createdBy, LocalDate startDate, LocalDate endDate, String team, String status) {

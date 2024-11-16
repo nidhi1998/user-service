@@ -1,6 +1,8 @@
 package com.wipro.user.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,13 +26,20 @@ public class TaskController {
 	TaskService taskService;
 	
 	@PostMapping("/task/create")
-	public CreateTaskResponse userRegister(@RequestBody Task request) {
+	public CreateTaskResponse createTask(@RequestBody Task request) {
 		return taskService.createtask(request);
 	}
 	@PostMapping("/task/fetch")
 	public FetchTaskResponse userRegister(@RequestBody FetchTaskRequest request) {
 		return taskService.fetchTask(request);
 	}
-	
+	@DeleteMapping("/task/delete/{id}")
+	public CreateTaskResponse userRegister(@PathVariable Long id) {
+		return taskService.deleteTask(id);
+	}
+	@PostMapping("/task/update")
+	public CreateTaskResponse updateTask(@RequestBody Task request) {
+		return taskService.updateTask(request);
+	}
 	
 }

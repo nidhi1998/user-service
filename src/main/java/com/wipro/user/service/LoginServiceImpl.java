@@ -1,12 +1,18 @@
 package com.wipro.user.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.wipro.user.dto.FetchUserResponse;
 import com.wipro.user.dto.LoginRequest;
 import com.wipro.user.dto.LoginResponse;
 import com.wipro.user.dto.RegisterRequest;
 import com.wipro.user.dto.RegisterResponse;
+import com.wipro.user.dto.TeamMemberResponse;
+import com.wipro.user.entity.TeamUserMapping;
 import com.wipro.user.entity.User;
 import com.wipro.user.repo.UserRepo;
 @Service
@@ -75,6 +81,23 @@ return response;}
 		}
 	
 	
+	}
+	@Override
+	public FetchUserResponse fetchUser() {
+		FetchUserResponse response = new FetchUserResponse();
+		List<User> users =  userRepo.findAllUser();
+		if(users==null || users.size()==0) {
+			response.setMessage("no user found");
+			response.setStatus("false");
+			return response;
+		}	List<TeamMemberResponse> members = users.stream()
+				.map(mapping -> new TeamMemberResponse(mapping.getId(), mapping.getName(),
+						mapping.getRole()))
+				.collect(Collectors.toList());
+		response.setUsers(members);
+		response.setMessage("user fetched successfully");
+		response.setStatus("true");
+		return response;
 	}
 	
 }

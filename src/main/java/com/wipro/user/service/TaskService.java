@@ -14,4 +14,8 @@ public interface TaskService {
 
 	FetchTaskResponse fetchTask(FetchTaskRequest request);
 
+	CreateTaskResponse deleteTask(Long id);
+
+	CreateTaskResponse updateTask(Task request);
+
 }

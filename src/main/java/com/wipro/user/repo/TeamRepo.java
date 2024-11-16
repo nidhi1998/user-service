@@ -14,5 +14,7 @@ public interface TeamRepo extends CrudRepository<Team,Long> {
 	Team findByName(@Param("name")String name);
 	@Query(value="select * from team where createdBy=:userId",nativeQuery=true)
 	List<Team> findAllByAdmin(@Param("userId")String userId);
+	@Query(value="select * from team where id=:id",nativeQuery=true)
+	Team findByIdTeam(@Param("id")Long teamId);
 
 }

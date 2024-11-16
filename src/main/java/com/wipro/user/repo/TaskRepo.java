@@ -15,7 +15,9 @@ public interface TaskRepo extends CrudRepository<Task,Long> {
 
 	@Query(value="select * from task where created_by=:userId",nativeQuery=true)
 	List<Task> findUserTask(@Param("userId")String userId);
-	@Query(value="select * from task where created_by=:userId and assign is null",nativeQuery=true)
+	@Query(value="select * from task where assign=:userId",nativeQuery=true)
+	List<Task> findUserTeamTask(@Param("userId")String userId);
+	@Query(value="select * from task where created_by=:userId and (assign is null or team is null)",nativeQuery=true)
 	List<Task> findAdminTask(String userId);
 	@Query(value="select * from task where created_by=:userId and team=:teamId",nativeQuery=true)
 	List<Task> findAdminTeamTask(@Param("userId")String userId, @Param("teamId")String team);
