@@ -25,7 +25,7 @@ public interface TaskRepo extends CrudRepository<Task,Long> {
 	int findPendingteamTask(@Param("userId")String userId, @Param("teamId")String team);
 	@Query(value="select count(*) from task where created_by=:userId and team=:teamId and status='In Progress'",nativeQuery=true)
 	int findInprogressTask(@Param("userId")String userId, @Param("teamId")String team);
-	@Query(value="select count(*) from task where created_by=:userId and team=:teamId and status='Complete'",nativeQuery=true)
+	@Query(value="select count(*) from task where created_by=:userId and team=:teamId and status='Completed'",nativeQuery=true)
 	int findCompleteTask(@Param("userId")String userId, @Param("teamId")String team);
 	
 

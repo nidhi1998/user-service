@@ -11,11 +11,14 @@ import com.wipro.user.dto.FetchTaskResponse;
 import com.wipro.user.entity.Task;
 import com.wipro.user.entity.User;
 import com.wipro.user.repo.TaskRepo;
+import com.wipro.user.repo.UserRepo;
 
 @Service
 public class TaskServiceImpl implements TaskService{
 @Autowired
 TaskRepo taskrepo;
+@Autowired
+UserRepo userRepo;
 @Override
 	public CreateTaskResponse createtask(Task request) {
 	
@@ -63,6 +66,16 @@ public FetchTaskResponse fetchTask(FetchTaskRequest request) {
 		return response;}}
 	}
 	if(tasks.size()>0) {
+		/*
+		 * System.out.println("testtttttttttttt"); for(int i=0;i<tasks.size();i++) {
+		 * if(tasks.get(i).getAssign()!=null && !tasks.get(i).getAssign().isEmpty()) {
+		 * User name = userRepo.findByIdUser(Long.parseLong(tasks.get(i).getAssign()));
+		 * if(name!=null) {
+		 * 
+		 * tasks.get(i).setAssign(name.getName()); } }
+		 * 
+		 * }
+		 */
 		response.setTasks(tasks);
 		response.setMessage("task fetched successfully");
 		response.setStatus("true");

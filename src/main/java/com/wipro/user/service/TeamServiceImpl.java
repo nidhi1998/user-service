@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.wipro.user.dto.CreateTaskResponse;
 import com.wipro.user.dto.CreateTeamResponse;
 import com.wipro.user.dto.FetchTeamMemberRequest;
 import com.wipro.user.dto.FetchTeamMemberResponse;
@@ -17,6 +18,7 @@ import com.wipro.user.dto.TeamMemberResponse1;
 import com.wipro.user.dto.TeamResponse;
 import com.wipro.user.dto.TeamUserMappingRequest;
 import com.wipro.user.dto.TeamUserMappingResponse;
+import com.wipro.user.entity.Task;
 import com.wipro.user.entity.Team;
 import com.wipro.user.entity.TeamUserMapping;
 import com.wipro.user.entity.User;
@@ -150,6 +152,46 @@ public class TeamServiceImpl implements TeamService {
 		response.setMembers(members);
 		return response;
 
+	}
+
+	@Override
+	public CreateTeamResponse deleteTeam(Long teamId) {
+		CreateTeamResponse response = new CreateTeamResponse();
+		boolean task = teamRepo.existsById(teamId);
+		if(!task) {
+			response.setStatus("false");
+			response.setMessage("team not found");
+			// TODO Auto-generated method stub
+			return response;
+		}
+		teamRepo.deleteById(teamId);
+		response.setStatus("true");
+		response.setMessage("deleted team successfully");
+		// TODO Auto-generated method stub
+		return response;
+	}
+
+	@Override
+	public CreateTaskResponse updateTeam(Team request) {
+		CreateTaskResponse response = new CreateTaskResponse();
+		boolean task = teamRepo.existsById(request.getId());
+		if(!task) {
+			response.setStatus("false");
+			response.setMessage("team not found");
+			// TODO Auto-generated method stub
+			return response;
+		}
+		Team res = teamRepo.save(request);
+		if(res==null) {
+			response.setStatus("false");
+			response.setMessage("team update failed ");
+			// TODO Auto-generated method stub
+			return response;
+		}
+		response.setStatus("true");
+		response.setMessage("team update success ");
+		// TODO Auto-generated method stub
+		return response;
 	}
 
 }

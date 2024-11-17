@@ -2,6 +2,7 @@ package com.wipro.user.service;
 
 import org.springframework.stereotype.Service;
 
+import com.wipro.user.dto.CreateTaskResponse;
 import com.wipro.user.dto.CreateTeamResponse;
 import com.wipro.user.dto.FetchTeamMemberRequest;
 import com.wipro.user.dto.FetchTeamMemberResponse;
@@ -21,5 +22,9 @@ public interface TeamService {
 	TeamUserMappingResponse addTeamMember(TeamUserMappingRequest request);
 
 	FetchTeamMemberResponse fetchTeamMembers(FetchTeamMemberRequest request);
+
+	CreateTeamResponse deleteTeam(Long teamId);
+
+	CreateTaskResponse updateTeam(Team request);
 
 }
