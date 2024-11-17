@@ -60,7 +60,12 @@ public class TeamServiceImpl implements TeamService {
 	@Override
 	public FetchTeamResponse fetchTeam(FetchTeamRequest request) {
 		FetchTeamResponse response = new FetchTeamResponse();
-		List<Team> teams = teamRepo.findAllByAdmin(request.getUserId());
+		List<Team> teams=null;
+		if(request.getUserType().equalsIgnoreCase("user"))
+		teams = teamRepo.findAllByAdmin(request.getUserId());
+		else {
+			teams = teamRepo.findAllforAdminTeams(request.getUserId());
+		}
 		if (teams == null) {
 			response.setMessage("no team found");
 			response.setStatus("false");
