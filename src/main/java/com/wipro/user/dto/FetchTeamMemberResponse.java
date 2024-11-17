@@ -1,18 +1,16 @@
-package com.wipro.user.cdto;
+package com.wipro.user.dto;
 
 import java.util.List;
 
-import com.wipro.user.dto.TeamMemberResponse;
-
 public class FetchTeamMemberResponse {
 
-	private List<TeamMemberResponse> members;
+	private List<TeamMemberResponse1> members;
 	private String message;
 	private String status;
-	public List<TeamMemberResponse> getMembers() {
+	public List<TeamMemberResponse1> getMembers() {
 		return members;
 	}
-	public void setMembers(List<TeamMemberResponse> members) {
+	public void setMembers(List<TeamMemberResponse1> members) {
 		this.members = members;
 	}
 	public String getMessage() {

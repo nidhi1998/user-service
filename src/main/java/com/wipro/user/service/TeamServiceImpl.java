@@ -7,12 +7,13 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.wipro.user.cdto.FetchTeamMemberResponse;
 import com.wipro.user.dto.CreateTeamResponse;
 import com.wipro.user.dto.FetchTeamMemberRequest;
+import com.wipro.user.dto.FetchTeamMemberResponse;
 import com.wipro.user.dto.FetchTeamRequest;
 import com.wipro.user.dto.FetchTeamResponse;
 import com.wipro.user.dto.TeamMemberResponse;
+import com.wipro.user.dto.TeamMemberResponse1;
 import com.wipro.user.dto.TeamResponse;
 import com.wipro.user.dto.TeamUserMappingRequest;
 import com.wipro.user.dto.TeamUserMappingResponse;
@@ -140,9 +141,9 @@ public class TeamServiceImpl implements TeamService {
 			response.setStatus("true");
 			return response;
 		}
-		List<TeamMemberResponse> members = mappings.stream()
-				.map(mapping -> new TeamMemberResponse(mapping.getUser().getId(), mapping.getUser().getName(),
-						mapping.getUser().getRole()))
+		List<TeamMemberResponse1> members = mappings.stream()
+				.map(mapping -> new TeamMemberResponse1(mapping.getUser().getId(), mapping.getUser().getName(),
+						mapping.getUser().getEmail()))
 				.collect(Collectors.toList());
 		response.setMessage("members fetched successfully ");
 		response.setStatus("true");
